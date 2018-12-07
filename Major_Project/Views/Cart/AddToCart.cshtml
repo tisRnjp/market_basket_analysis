@@ -1,0 +1,26 @@
+﻿@model Major_Project.Models.CartViewModel
+
+@{
+    ViewBag.Title = "AddToCart";
+}
+
+<h2>AddToCart</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@if (Session["Cart"] == null)
+{
+    <div class="alert alert-warning">
+        <p>Cart is empty</p>
+    </div>
+}
+else { 
+@Html.Partial("Cart")
+}
+<a href="@ViewBag.PreviousUrl" class="btn btn-success">Continue Shopping</a>
+@if (Session["Cart"] != null)
+{
+    <a href="/Orders/Checkout" class="btn btn-warning">Checkout</a>
+}

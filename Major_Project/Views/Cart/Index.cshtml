@@ -1,0 +1,16 @@
+﻿@model Major_Project.Models.CartViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Cart</h2>
+
+@Html.Partial("Cart")
+
+
+<a href="@ViewBag.PreviousUrl" class="btn btn-success">Continue Shopping</a>
+@if (Session["Cart"] != null)
+{
+    <a href="/Orders/Checkout" class="btn btn-warning">Checkout</a>
+}

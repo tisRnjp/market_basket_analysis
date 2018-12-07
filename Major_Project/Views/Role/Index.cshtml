@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+
+@{
+    ViewBag.Title = "Roles";
+}
+
+<h2>List of roles</h2>
+
+
+@*************
+    NOT WORKING
+    **************@
+
+@if (@ViewBag.ResultMessage != null)
+{
+    <div class="alert alert-danger">
+        <p>@ViewBag.ResultMessage</p>
+    </div>
+}
+@Html.ActionLink("Create new role", "Create") | @Html.ActionLink("Manage user roles", "ManageUserRoles")
+<hr />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            Edit Options
+        </th>
+    </tr>
+    
+            @foreach (var role in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(roleName => role.Name)
+                    </td>
+                    <td>
+                        <span onclick="return confirm('Are you sure to delete?')">
+                            @Html.ActionLink("Delete", "Delete", new { roleName = role.Name })
+                        </span> |
+                        @Html.ActionLink("Edit", "Edit", new { roleName = role.Name })
+                    </td>
+                </tr>
+            }
+</table>

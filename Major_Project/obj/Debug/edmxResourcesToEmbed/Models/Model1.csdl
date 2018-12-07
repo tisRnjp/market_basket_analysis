@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Major_ProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="item">
+    <Key>
+      <PropertyRef Name="item_id" />
+    </Key>
+    <Property Name="item_id" Type="Int32" Nullable="false" />
+    <Property Name="item_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="item_price" Type="Int32" Nullable="false" />
+    <Property Name="category" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="transacs" Relationship="Self.transac_item" FromRole="item" ToRole="transac" />
+  </EntityType>
+  <EntityType Name="tbl_const">
+    <Key>
+      <PropertyRef Name="item_id" />
+    </Key>
+    <Property Name="item_id" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="transac">
+    <Key>
+      <PropertyRef Name="transac_id" />
+    </Key>
+    <Property Name="transac_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="items" Relationship="Self.transac_item" FromRole="transac" ToRole="item" />
+  </EntityType>
+  <EntityType Name="tbl_FinalAmerge">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="merged_items" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="merged_items" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_FinalBmerge">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="item_id1" Type="Int32" />
+    <Property Name="item_id2" Type="Int32" />
+    <Property Name="item_id3" Type="Int32" />
+    <Property Name="item_id4" Type="Int32" />
+    <Property Name="item_id5" Type="Int32" />
+    <Property Name="item_id6" Type="Int32" />
+    <Property Name="item_id7" Type="Int32" />
+    <Property Name="item_id8" Type="Int32" />
+    <Property Name="item_id9" Type="Int32" />
+    <Property Name="item_id10" Type="Int32" />
+    <Property Name="item_id11" Type="Int32" />
+    <Property Name="item_id12" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tbl_Initial1">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="item_id1" Type="Int32" />
+    <Property Name="item_id2" Type="Int32" />
+    <Property Name="item_id3" Type="Int32" />
+    <Property Name="item_id4" Type="Int32" />
+    <Property Name="item_id5" Type="Int32" />
+    <Property Name="item_id6" Type="Int32" />
+    <Property Name="item_id7" Type="Int32" />
+    <Property Name="item_id8" Type="Int32" />
+    <Property Name="item_id9" Type="Int32" />
+    <Property Name="item_id10" Type="Int32" />
+    <Property Name="item_id11" Type="Int32" />
+    <Property Name="item_id12" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tbl_Initial2">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="item_id1" Type="Int32" />
+  </EntityType>
+  <Association Name="transac_item">
+    <End Role="item" Type="Self.item" Multiplicity="*" />
+    <End Role="transac" Type="Self.transac" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="Major_ProjectEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="items" EntityType="Self.item" />
+    <EntitySet Name="tbl_const" EntityType="Self.tbl_const" />
+    <EntitySet Name="transacs" EntityType="Self.transac" />
+    <EntitySet Name="tbl_FinalAmerge" EntityType="Self.tbl_FinalAmerge" />
+    <EntitySet Name="tbl_FinalBmerge" EntityType="Self.tbl_FinalBmerge" />
+    <EntitySet Name="tbl_Initial1" EntityType="Self.tbl_Initial1" />
+    <EntitySet Name="tbl_Initial2" EntityType="Self.tbl_Initial2" />
+    <AssociationSet Name="transac_item" Association="Self.transac_item">
+      <End Role="item" EntitySet="items" />
+      <End Role="transac" EntitySet="transacs" />
+    </AssociationSet>
+    <FunctionImport Name="prune" ReturnType="Collection(String)" />
+    <FunctionImport Name="sp_emptyall" ReturnType="Collection(Major_ProjectModel.sp_emptyall_Result)" />
+    <FunctionImport Name="sp_movetofinalAmerge">
+      <Parameter Name="level" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_refresh" />
+    <FunctionImport Name="sp_stepfirst" />
+    <FunctionImport Name="sp_stepsecond">
+      <Parameter Name="itema" Mode="In" Type="String" />
+      <Parameter Name="itemb" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="count_itemname" ReturnType="Collection(String)" />
+    <FunctionImport Name="count_itemcount" ReturnType="Collection(Int32)" />
+  </EntityContainer>
+  <ComplexType Name="sp_emptyall_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="Int32" Name="item_id1" Nullable="true" />
+    <Property Type="Int32" Name="item_id2" Nullable="true" />
+    <Property Type="Int32" Name="item_id3" Nullable="true" />
+    <Property Type="Int32" Name="item_id4" Nullable="true" />
+    <Property Type="Int32" Name="item_id5" Nullable="true" />
+    <Property Type="Int32" Name="item_id6" Nullable="true" />
+    <Property Type="Int32" Name="item_id7" Nullable="true" />
+    <Property Type="Int32" Name="item_id8" Nullable="true" />
+    <Property Type="Int32" Name="item_id9" Nullable="true" />
+    <Property Type="Int32" Name="item_id10" Nullable="true" />
+    <Property Type="Int32" Name="item_id11" Nullable="true" />
+    <Property Type="Int32" Name="item_id12" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_movetofinalAmerge_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="Int32" Name="item_id1" Nullable="true" />
+    <Property Type="Int32" Name="item_id2" Nullable="true" />
+    <Property Type="Int32" Name="item_id3" Nullable="true" />
+    <Property Type="Int32" Name="item_id4" Nullable="true" />
+    <Property Type="Int32" Name="item_id5" Nullable="true" />
+    <Property Type="Int32" Name="item_id6" Nullable="true" />
+    <Property Type="Int32" Name="item_id7" Nullable="true" />
+    <Property Type="Int32" Name="item_id8" Nullable="true" />
+    <Property Type="Int32" Name="item_id9" Nullable="true" />
+    <Property Type="Int32" Name="item_id10" Nullable="true" />
+    <Property Type="Int32" Name="item_id11" Nullable="true" />
+    <Property Type="Int32" Name="item_id12" Nullable="true" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,240 @@
+﻿@model IEnumerable<Major_Project.Models.item>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (Request.QueryString["message"] != null)
+{
+    <div class="alert alert-warning">Product already exists in a cart!!!</div>
+}
+
+<div class="container"><h2>Details</h2></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            @{
+                var DetailName = "/images/" + ViewBag.ID + ".jpg";
+            }
+            <img src="@DetailName" class="detailimage" />
+        </div>
+        <div class="col-md-8 capitalize">
+            <table class="table table-hover">
+                <tr>
+                    <th>Name</th>
+                    <td align="left">@ViewBag.Name</td>
+                </tr>
+                <tr>
+                    <th>Category</th>
+                    <td align="left">@ViewBag.Category</td>
+                </tr>
+                <tr>
+                    <th>Price</th>
+                    <td align="left">@ViewBag.Price</td>
+                </tr>
+            </table>
+
+            <div class="container">
+                @Html.ActionLink("Add to cart", "AddToCart", "Cart", new { id = ViewBag.ID }, new { @class = "btn btn-warning" })
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-1">Bar Chart</button>
+                <div class="modal fade" id="modal-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times</button>
+                                <h3>Detail Chart</h3>
+
+                            </div>
+                            <div class="modal-body">
+                                <div id="canvas">
+
+
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="" class="btn btn-default" data-dismiss="modal">Close</a>
+
+                                @*<a href="" class="btn btn-primary">Download</a>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> @*modal container *@
+        </div>   @*grid*@
+
+
+    </div> @*row div*@
+</div>
+
+
+<div class="container">
+    @*recommended items*@
+    <br />
+    <br />
+    <div class="well well-sm"><h4><b>RECOMMENDED ITEMS</b></h4></div>
+    <br />
+    <div class="row">
+        @foreach (var x in Model)
+        {
+            var imageName = "/images/" + @x.item_id + ".jpg";
+
+
+       <!-- <div class="col-sm-6 col-md-3">-->
+            <div class="col-lg-2 col-md-2 col-xs-6 thumb">
+                <a href="@Url.Action("Index", "Analysis", new { id = x.item_id }, null)">
+                    <div class="thumbnail">
+                        <img src="@imageName" />
+
+                    </div>
+                </a>
+                <div class="caption capitalize">
+                    <div class="caption capitalize">
+                        <h6><span class="glyphicon  glyphicon-shopping-cart"></span>@Html.DisplayFor(model => x.item_name)</h6>
+                        @*<h6>@Html.DisplayFor(model => x.item_id)</h6>*@
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+
+
+
+<div class="container">
+    @*other items*@
+    <br />
+    <br />
+    <div class="well well-sm"><h4><b>OTHER ITEMS</b></h4></div>
+    <br />
+    <div class="row">
+        @foreach (var x in ViewBag.items)
+        {
+            var imageName = "/images/" + @x.item_id + ".jpg";
+
+
+             <!-- <div class="col-sm-6 col-md-3">-->
+            <div class="col-lg-2 col-md-2 col-xs-6 thumb">
+                <a href="@Url.Action("Index", "Analysis", new { id = x.item_id }, null)">
+                    <div class="thumbnail">
+                        <img src="@imageName" />
+                    </div>
+                </a>
+                <div class="caption capitalize">
+                    <div class="caption capitalize">
+                        <h6><span class="glyphicon  glyphicon-shopping-cart"></span>@x.item_name</h6>
+                        @*<h6>@Html.DisplayFor(model => x.item_id)</h6>*@
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+
+
+
+
+
+
+<script>
+    var data;
+
+
+    console.log(@ViewBag.ID);
+    $.ajaxSetup({
+        async: false
+    });
+    $.getJSON('@Url.Action("ShowChart", "Analysis", new { id = @ViewBag.ID},null)', function (result) {
+
+
+        assign(result);
+
+    });
+    function assign(value) {
+
+        //console.log(data);
+        data = value;
+    };
+    console.log(data);
+    var map = data.map(function (i) {
+        return parseInt(i.y2);
+    });
+    var colorscale = d3.scale.ordinal()
+                       .range(["#b05739", "#f73f00", "#dd3900", "#836527", "#616161"]);
+    //.domain([0, d3.max(map)])
+    //.range(["red","black"]);
+    var xScale = d3.scale.linear()
+                        .domain([0, function (d) { return data.length; }])
+                        .range([0, 500]);
+
+    var yScale = d3.scale.linear()
+                        .domain([d3.max(map), 0])
+                        .range([0, 450]);
+
+    var axis = d3.svg.axis()
+                        .ticks(data.length)
+                        .scale(xScale);
+    var axis2 = d3.svg.axis()
+                        .ticks(10)
+                        .orient("left")
+                        .scale(yScale);
+
+
+
+    var canvas = d3.select("#canvas")
+                     .append("svg")
+                     .attr("height", 500)
+                     .attr("width", 600);
+    var xaxisText = canvas.selectAll("text")		//text i.e product names
+                        .data(data)
+                        .enter()
+                            .append("text")
+                            .text(function (d) { return d.label; })
+                            .attr("x", function (d) { return d.x2; })
+                            .attr("transform", "translate(20,0)")
+                            .attr("fill", "steelblue")
+                            .attr("y", 470);
+    var line = canvas.selectAll("line")	//dsh lines or bar lines
+            .data(data)
+            .enter()
+                .append("line")
+                .attr("x1", function (d) { return d.x2; })
+                .attr("y1", function (d) { return yScale(d.y2); })
+                .attr("x2", function (d) { return d.x2; })
+                .attr("y2", 450)
+                //.style("stroke-dasharray", ("5, 5"))
+                .attr("transform", "translate(35,0)")
+                .attr("stroke", function (d) { return colorscale(d.y2) })
+                .attr("stroke-width", 50);
+
+    canvas.append("g") //y axis
+               .attr("transform", "translate(30,0)")
+               .attr('class', 'axis')
+                .attr("stroke-width", 1)
+                .attr("fill", "steelblue")
+               .call(axis2);
+
+    canvas.append("line") // x axis
+                .attr("x1", 15)
+                .attr("y1", 450)
+                .attr("x2", 600)
+                .attr("y2", 450)
+                .attr("stroke", "steelblue")
+                //.style("stroke-dasharray", ("5, 5"))
+                .attr("transform", "translate(10,0)")
+                .attr("stroke-width", 2);
+
+    canvas.append("text")
+            .text("Items")
+            .attr("x", 350)
+            .attr("y", 490)
+            .attr("fill", "steelblue");
+
+
+
+</script>

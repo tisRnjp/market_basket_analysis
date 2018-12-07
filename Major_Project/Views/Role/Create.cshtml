@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Create Roles";
+}
+
+<h2>Create Role</h2>
+
+@if (@ViewBag.ResultMessage != null)
+{
+    <div class="alert alert-success">
+        <p>
+            @ViewBag.ResultMessage
+        </p>
+    </div>
+}
+@Html.ActionLink("List roles", "Create") | @Html.ActionLink("Manage user roles", "ManageUserRoles")
+
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.DisplayName("Role name:")
+    @Html.TextBox("RoleName")
+
+    <input type="submit" value="Save" />
+}

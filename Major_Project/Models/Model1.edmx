@@ -1,0 +1,473 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Major_ProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="item">
+          <Key>
+            <PropertyRef Name="item_id" />
+          </Key>
+          <Property Name="item_id" Type="int" Nullable="false" />
+          <Property Name="item_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="item_price" Type="int" Nullable="false" />
+          <Property Name="category" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_const">
+          <Key>
+            <PropertyRef Name="item_id" />
+          </Key>
+          <Property Name="item_id" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\MY PC\DOCUMENTS\VISUAL STUDIO 2013\PROJECTS\MAJOR_PROJECT\MAJOR_PROJECT\APP_DATA\MAJOR_PROJECT.MDF.dbo.tbl_FinalAmerge' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tbl_FinalAmerge">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="merged_items" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="merged_items" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\MY PC\DOCUMENTS\VISUAL STUDIO 2013\PROJECTS\MAJOR_PROJECT\MAJOR_PROJECT\APP_DATA\MAJOR_PROJECT.MDF.dbo.tbl_FinalBmerge' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tbl_FinalBmerge">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="item_id1" Type="int" />
+          <Property Name="item_id2" Type="int" />
+          <Property Name="item_id3" Type="int" />
+          <Property Name="item_id4" Type="int" />
+          <Property Name="item_id5" Type="int" />
+          <Property Name="item_id6" Type="int" />
+          <Property Name="item_id7" Type="int" />
+          <Property Name="item_id8" Type="int" />
+          <Property Name="item_id9" Type="int" />
+          <Property Name="item_id10" Type="int" />
+          <Property Name="item_id11" Type="int" />
+          <Property Name="item_id12" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\MY PC\DOCUMENTS\VISUAL STUDIO 2013\PROJECTS\MAJOR_PROJECT\MAJOR_PROJECT\APP_DATA\MAJOR_PROJECT.MDF.dbo.tbl_Initial1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tbl_Initial1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="item_id1" Type="int" />
+          <Property Name="item_id2" Type="int" />
+          <Property Name="item_id3" Type="int" />
+          <Property Name="item_id4" Type="int" />
+          <Property Name="item_id5" Type="int" />
+          <Property Name="item_id6" Type="int" />
+          <Property Name="item_id7" Type="int" />
+          <Property Name="item_id8" Type="int" />
+          <Property Name="item_id9" Type="int" />
+          <Property Name="item_id10" Type="int" />
+          <Property Name="item_id11" Type="int" />
+          <Property Name="item_id12" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\MY PC\DOCUMENTS\VISUAL STUDIO 2013\PROJECTS\MAJOR_PROJECT\MAJOR_PROJECT\APP_DATA\MAJOR_PROJECT.MDF.dbo.tbl_Initial2' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tbl_Initial2">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="item_id1" Type="int" />
+        </EntityType>
+        <EntityType Name="transac">
+          <Key>
+            <PropertyRef Name="transac_id" />
+          </Key>
+          <Property Name="transac_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="transac_item">
+          <Key>
+            <PropertyRef Name="transac_id" />
+            <PropertyRef Name="item_id" />
+          </Key>
+          <Property Name="transac_id" Type="int" Nullable="false" />
+          <Property Name="item_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__transac_i__item___619B8048">
+          <End Role="item" Type="Self.item" Multiplicity="1" />
+          <End Role="transac_item" Type="Self.transac_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item">
+              <PropertyRef Name="item_id" />
+            </Principal>
+            <Dependent Role="transac_item">
+              <PropertyRef Name="item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transac_i__trans__60A75C0F">
+          <End Role="transac" Type="Self.transac" Multiplicity="1" />
+          <End Role="transac_item" Type="Self.transac_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="transac">
+              <PropertyRef Name="transac_id" />
+            </Principal>
+            <Dependent Role="transac_item">
+              <PropertyRef Name="transac_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="count_itemcount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="count_itemname" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="prune" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_emptyall" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_movetofinalAmerge" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="level" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_refresh" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_stepfirst" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_stepsecond" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="itema" Type="varchar" Mode="In" />
+          <Parameter Name="itemb" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="Major_ProjectModelStoreContainer">
+          <EntitySet Name="item" EntityType="Self.item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_const" EntityType="Self.tbl_const" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="transac" EntityType="Self.transac" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="transac_item" EntityType="Self.transac_item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_FinalAmerge" EntityType="Self.tbl_FinalAmerge" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tbl_FinalAmerge].[id] AS [id], 
+    [tbl_FinalAmerge].[merged_items] AS [merged_items]
+    FROM [dbo].[tbl_FinalAmerge] AS [tbl_FinalAmerge]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tbl_FinalBmerge" EntityType="Self.tbl_FinalBmerge" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tbl_FinalBmerge].[id] AS [id], 
+    [tbl_FinalBmerge].[item_id1] AS [item_id1], 
+    [tbl_FinalBmerge].[item_id2] AS [item_id2], 
+    [tbl_FinalBmerge].[item_id3] AS [item_id3], 
+    [tbl_FinalBmerge].[item_id4] AS [item_id4], 
+    [tbl_FinalBmerge].[item_id5] AS [item_id5], 
+    [tbl_FinalBmerge].[item_id6] AS [item_id6], 
+    [tbl_FinalBmerge].[item_id7] AS [item_id7], 
+    [tbl_FinalBmerge].[item_id8] AS [item_id8], 
+    [tbl_FinalBmerge].[item_id9] AS [item_id9], 
+    [tbl_FinalBmerge].[item_id10] AS [item_id10], 
+    [tbl_FinalBmerge].[item_id11] AS [item_id11], 
+    [tbl_FinalBmerge].[item_id12] AS [item_id12]
+    FROM [dbo].[tbl_FinalBmerge] AS [tbl_FinalBmerge]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tbl_Initial1" EntityType="Self.tbl_Initial1" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tbl_Initial1].[id] AS [id], 
+    [tbl_Initial1].[item_id1] AS [item_id1], 
+    [tbl_Initial1].[item_id2] AS [item_id2], 
+    [tbl_Initial1].[item_id3] AS [item_id3], 
+    [tbl_Initial1].[item_id4] AS [item_id4], 
+    [tbl_Initial1].[item_id5] AS [item_id5], 
+    [tbl_Initial1].[item_id6] AS [item_id6], 
+    [tbl_Initial1].[item_id7] AS [item_id7], 
+    [tbl_Initial1].[item_id8] AS [item_id8], 
+    [tbl_Initial1].[item_id9] AS [item_id9], 
+    [tbl_Initial1].[item_id10] AS [item_id10], 
+    [tbl_Initial1].[item_id11] AS [item_id11], 
+    [tbl_Initial1].[item_id12] AS [item_id12]
+    FROM [dbo].[tbl_Initial1] AS [tbl_Initial1]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tbl_Initial2" EntityType="Self.tbl_Initial2" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tbl_Initial2].[id] AS [id], 
+    [tbl_Initial2].[item_id1] AS [item_id1]
+    FROM [dbo].[tbl_Initial2] AS [tbl_Initial2]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__transac_i__item___619B8048" Association="Self.FK__transac_i__item___619B8048">
+            <End Role="item" EntitySet="item" />
+            <End Role="transac_item" EntitySet="transac_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transac_i__trans__60A75C0F" Association="Self.FK__transac_i__trans__60A75C0F">
+            <End Role="transac" EntitySet="transac" />
+            <End Role="transac_item" EntitySet="transac_item" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Major_ProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="item">
+          <Key>
+            <PropertyRef Name="item_id" />
+          </Key>
+          <Property Name="item_id" Type="Int32" Nullable="false" />
+          <Property Name="item_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="item_price" Type="Int32" Nullable="false" />
+          <Property Name="category" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="transacs" Relationship="Self.transac_item" FromRole="item" ToRole="transac" />
+        </EntityType>
+        <EntityType Name="tbl_const">
+          <Key>
+            <PropertyRef Name="item_id" />
+          </Key>
+          <Property Name="item_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="transac">
+          <Key>
+            <PropertyRef Name="transac_id" />
+          </Key>
+          <Property Name="transac_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="items" Relationship="Self.transac_item" FromRole="transac" ToRole="item" />
+        </EntityType>
+        <EntityType Name="tbl_FinalAmerge">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="merged_items" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="merged_items" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_FinalBmerge">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="item_id1" Type="Int32" />
+          <Property Name="item_id2" Type="Int32" />
+          <Property Name="item_id3" Type="Int32" />
+          <Property Name="item_id4" Type="Int32" />
+          <Property Name="item_id5" Type="Int32" />
+          <Property Name="item_id6" Type="Int32" />
+          <Property Name="item_id7" Type="Int32" />
+          <Property Name="item_id8" Type="Int32" />
+          <Property Name="item_id9" Type="Int32" />
+          <Property Name="item_id10" Type="Int32" />
+          <Property Name="item_id11" Type="Int32" />
+          <Property Name="item_id12" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_Initial1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="item_id1" Type="Int32" />
+          <Property Name="item_id2" Type="Int32" />
+          <Property Name="item_id3" Type="Int32" />
+          <Property Name="item_id4" Type="Int32" />
+          <Property Name="item_id5" Type="Int32" />
+          <Property Name="item_id6" Type="Int32" />
+          <Property Name="item_id7" Type="Int32" />
+          <Property Name="item_id8" Type="Int32" />
+          <Property Name="item_id9" Type="Int32" />
+          <Property Name="item_id10" Type="Int32" />
+          <Property Name="item_id11" Type="Int32" />
+          <Property Name="item_id12" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_Initial2">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="item_id1" Type="Int32" />
+        </EntityType>
+        <Association Name="transac_item">
+          <End Role="item" Type="Self.item" Multiplicity="*" />
+          <End Role="transac" Type="Self.transac" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Major_ProjectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="items" EntityType="Self.item" />
+          <EntitySet Name="tbl_const" EntityType="Self.tbl_const" />
+          <EntitySet Name="transacs" EntityType="Self.transac" />
+          <EntitySet Name="tbl_FinalAmerge" EntityType="Self.tbl_FinalAmerge" />
+          <EntitySet Name="tbl_FinalBmerge" EntityType="Self.tbl_FinalBmerge" />
+          <EntitySet Name="tbl_Initial1" EntityType="Self.tbl_Initial1" />
+          <EntitySet Name="tbl_Initial2" EntityType="Self.tbl_Initial2" />
+          <AssociationSet Name="transac_item" Association="Self.transac_item">
+            <End Role="item" EntitySet="items" />
+            <End Role="transac" EntitySet="transacs" />
+          </AssociationSet>
+          <FunctionImport Name="prune" ReturnType="Collection(String)" />
+          <FunctionImport Name="sp_emptyall" ReturnType="Collection(Major_ProjectModel.sp_emptyall_Result)" />
+          <FunctionImport Name="sp_movetofinalAmerge">
+          <Parameter Name="level" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_refresh" />
+          <FunctionImport Name="sp_stepfirst" />
+          <FunctionImport Name="sp_stepsecond">
+            <Parameter Name="itema" Mode="In" Type="String" />
+            <Parameter Name="itemb" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="count_itemname" ReturnType="Collection(String)" />
+          <FunctionImport Name="count_itemcount" ReturnType="Collection(Int32)" />
+        </EntityContainer>
+        <ComplexType Name="sp_emptyall_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="item_id1" Nullable="true" />
+          <Property Type="Int32" Name="item_id2" Nullable="true" />
+          <Property Type="Int32" Name="item_id3" Nullable="true" />
+          <Property Type="Int32" Name="item_id4" Nullable="true" />
+          <Property Type="Int32" Name="item_id5" Nullable="true" />
+          <Property Type="Int32" Name="item_id6" Nullable="true" />
+          <Property Type="Int32" Name="item_id7" Nullable="true" />
+          <Property Type="Int32" Name="item_id8" Nullable="true" />
+          <Property Type="Int32" Name="item_id9" Nullable="true" />
+          <Property Type="Int32" Name="item_id10" Nullable="true" />
+          <Property Type="Int32" Name="item_id11" Nullable="true" />
+          <Property Type="Int32" Name="item_id12" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_movetofinalAmerge_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="item_id1" Nullable="true" />
+          <Property Type="Int32" Name="item_id2" Nullable="true" />
+          <Property Type="Int32" Name="item_id3" Nullable="true" />
+          <Property Type="Int32" Name="item_id4" Nullable="true" />
+          <Property Type="Int32" Name="item_id5" Nullable="true" />
+          <Property Type="Int32" Name="item_id6" Nullable="true" />
+          <Property Type="Int32" Name="item_id7" Nullable="true" />
+          <Property Type="Int32" Name="item_id8" Nullable="true" />
+          <Property Type="Int32" Name="item_id9" Nullable="true" />
+          <Property Type="Int32" Name="item_id10" Nullable="true" />
+          <Property Type="Int32" Name="item_id11" Nullable="true" />
+          <Property Type="Int32" Name="item_id12" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Major_ProjectModelStoreContainer" CdmEntityContainer="Major_ProjectEntities">
+          <EntitySetMapping Name="items">
+            <EntityTypeMapping TypeName="Major_ProjectModel.item">
+              <MappingFragment StoreEntitySet="item">
+                <ScalarProperty Name="item_id" ColumnName="item_id" />
+                <ScalarProperty Name="item_name" ColumnName="item_name" />
+                <ScalarProperty Name="item_price" ColumnName="item_price" />
+                <ScalarProperty Name="category" ColumnName="category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_const">
+            <EntityTypeMapping TypeName="Major_ProjectModel.tbl_const">
+              <MappingFragment StoreEntitySet="tbl_const">
+                <ScalarProperty Name="item_id" ColumnName="item_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="transacs">
+            <EntityTypeMapping TypeName="Major_ProjectModel.transac">
+              <MappingFragment StoreEntitySet="transac">
+                <ScalarProperty Name="transac_id" ColumnName="transac_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_FinalAmerge">
+            <EntityTypeMapping TypeName="Major_ProjectModel.tbl_FinalAmerge">
+              <MappingFragment StoreEntitySet="tbl_FinalAmerge">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="merged_items" ColumnName="merged_items" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_FinalBmerge">
+            <EntityTypeMapping TypeName="Major_ProjectModel.tbl_FinalBmerge">
+              <MappingFragment StoreEntitySet="tbl_FinalBmerge">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="item_id1" ColumnName="item_id1" />
+                <ScalarProperty Name="item_id2" ColumnName="item_id2" />
+                <ScalarProperty Name="item_id3" ColumnName="item_id3" />
+                <ScalarProperty Name="item_id4" ColumnName="item_id4" />
+                <ScalarProperty Name="item_id5" ColumnName="item_id5" />
+                <ScalarProperty Name="item_id6" ColumnName="item_id6" />
+                <ScalarProperty Name="item_id7" ColumnName="item_id7" />
+                <ScalarProperty Name="item_id8" ColumnName="item_id8" />
+                <ScalarProperty Name="item_id9" ColumnName="item_id9" />
+                <ScalarProperty Name="item_id10" ColumnName="item_id10" />
+                <ScalarProperty Name="item_id11" ColumnName="item_id11" />
+                <ScalarProperty Name="item_id12" ColumnName="item_id12" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Initial1">
+            <EntityTypeMapping TypeName="Major_ProjectModel.tbl_Initial1">
+              <MappingFragment StoreEntitySet="tbl_Initial1">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="item_id1" ColumnName="item_id1" />
+                <ScalarProperty Name="item_id2" ColumnName="item_id2" />
+                <ScalarProperty Name="item_id3" ColumnName="item_id3" />
+                <ScalarProperty Name="item_id4" ColumnName="item_id4" />
+                <ScalarProperty Name="item_id5" ColumnName="item_id5" />
+                <ScalarProperty Name="item_id6" ColumnName="item_id6" />
+                <ScalarProperty Name="item_id7" ColumnName="item_id7" />
+                <ScalarProperty Name="item_id8" ColumnName="item_id8" />
+                <ScalarProperty Name="item_id9" ColumnName="item_id9" />
+                <ScalarProperty Name="item_id10" ColumnName="item_id10" />
+                <ScalarProperty Name="item_id11" ColumnName="item_id11" />
+                <ScalarProperty Name="item_id12" ColumnName="item_id12" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Initial2">
+            <EntityTypeMapping TypeName="Major_ProjectModel.tbl_Initial2">
+              <MappingFragment StoreEntitySet="tbl_Initial2">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="item_id1" ColumnName="item_id1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="transac_item" TypeName="Major_ProjectModel.transac_item" StoreEntitySet="transac_item">
+            <EndProperty Name="item">
+              <ScalarProperty Name="item_id" ColumnName="item_id" />
+            </EndProperty>
+            <EndProperty Name="transac">
+              <ScalarProperty Name="transac_id" ColumnName="transac_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="prune" FunctionName="Major_ProjectModel.Store.prune" />
+          <FunctionImportMapping FunctionImportName="sp_emptyall" FunctionName="Major_ProjectModel.Store.sp_emptyall">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Major_ProjectModel.sp_emptyall_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="item_id1" ColumnName="item_id1" />
+                <ScalarProperty Name="item_id2" ColumnName="item_id2" />
+                <ScalarProperty Name="item_id3" ColumnName="item_id3" />
+                <ScalarProperty Name="item_id4" ColumnName="item_id4" />
+                <ScalarProperty Name="item_id5" ColumnName="item_id5" />
+                <ScalarProperty Name="item_id6" ColumnName="item_id6" />
+                <ScalarProperty Name="item_id7" ColumnName="item_id7" />
+                <ScalarProperty Name="item_id8" ColumnName="item_id8" />
+                <ScalarProperty Name="item_id9" ColumnName="item_id9" />
+                <ScalarProperty Name="item_id10" ColumnName="item_id10" />
+                <ScalarProperty Name="item_id11" ColumnName="item_id11" />
+                <ScalarProperty Name="item_id12" ColumnName="item_id12" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_movetofinalAmerge" FunctionName="Major_ProjectModel.Store.sp_movetofinalAmerge">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_refresh" FunctionName="Major_ProjectModel.Store.sp_refresh" />
+          <FunctionImportMapping FunctionImportName="sp_stepfirst" FunctionName="Major_ProjectModel.Store.sp_stepfirst" />
+          <FunctionImportMapping FunctionImportName="sp_stepsecond" FunctionName="Major_ProjectModel.Store.sp_stepsecond" />
+          <FunctionImportMapping FunctionImportName="count_itemname" FunctionName="Major_ProjectModel.Store.count_itemname" />
+          <FunctionImportMapping FunctionImportName="count_itemcount" FunctionName="Major_ProjectModel.Store.count_itemcount" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

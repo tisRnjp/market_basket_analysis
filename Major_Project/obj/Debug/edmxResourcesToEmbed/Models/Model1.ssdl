@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Major_ProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="item">
+    <Key>
+      <PropertyRef Name="item_id" />
+    </Key>
+    <Property Name="item_id" Type="int" Nullable="false" />
+    <Property Name="item_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="item_price" Type="int" Nullable="false" />
+    <Property Name="category" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_const">
+    <Key>
+      <PropertyRef Name="item_id" />
+    </Key>
+    <Property Name="item_id" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\MY PC\DOCUMENTS\VISUAL STUDIO 2013\PROJECTS\MAJOR_PROJECT\MAJOR_PROJECT\APP_DATA\MAJOR_PROJECT.MDF.dbo.tbl_FinalAmerge' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_FinalAmerge">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="merged_items" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="merged_items" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\MY PC\DOCUMENTS\VISUAL STUDIO 2013\PROJECTS\MAJOR_PROJECT\MAJOR_PROJECT\APP_DATA\MAJOR_PROJECT.MDF.dbo.tbl_FinalBmerge' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_FinalBmerge">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="item_id1" Type="int" />
+    <Property Name="item_id2" Type="int" />
+    <Property Name="item_id3" Type="int" />
+    <Property Name="item_id4" Type="int" />
+    <Property Name="item_id5" Type="int" />
+    <Property Name="item_id6" Type="int" />
+    <Property Name="item_id7" Type="int" />
+    <Property Name="item_id8" Type="int" />
+    <Property Name="item_id9" Type="int" />
+    <Property Name="item_id10" Type="int" />
+    <Property Name="item_id11" Type="int" />
+    <Property Name="item_id12" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\MY PC\DOCUMENTS\VISUAL STUDIO 2013\PROJECTS\MAJOR_PROJECT\MAJOR_PROJECT\APP_DATA\MAJOR_PROJECT.MDF.dbo.tbl_Initial1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_Initial1">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="item_id1" Type="int" />
+    <Property Name="item_id2" Type="int" />
+    <Property Name="item_id3" Type="int" />
+    <Property Name="item_id4" Type="int" />
+    <Property Name="item_id5" Type="int" />
+    <Property Name="item_id6" Type="int" />
+    <Property Name="item_id7" Type="int" />
+    <Property Name="item_id8" Type="int" />
+    <Property Name="item_id9" Type="int" />
+    <Property Name="item_id10" Type="int" />
+    <Property Name="item_id11" Type="int" />
+    <Property Name="item_id12" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'C:\USERS\MY PC\DOCUMENTS\VISUAL STUDIO 2013\PROJECTS\MAJOR_PROJECT\MAJOR_PROJECT\APP_DATA\MAJOR_PROJECT.MDF.dbo.tbl_Initial2' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_Initial2">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="item_id1" Type="int" />
+  </EntityType>
+  <EntityType Name="transac">
+    <Key>
+      <PropertyRef Name="transac_id" />
+    </Key>
+    <Property Name="transac_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="transac_item">
+    <Key>
+      <PropertyRef Name="transac_id" />
+      <PropertyRef Name="item_id" />
+    </Key>
+    <Property Name="transac_id" Type="int" Nullable="false" />
+    <Property Name="item_id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__transac_i__item___619B8048">
+    <End Role="item" Type="Self.item" Multiplicity="1" />
+    <End Role="transac_item" Type="Self.transac_item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="item">
+        <PropertyRef Name="item_id" />
+      </Principal>
+      <Dependent Role="transac_item">
+        <PropertyRef Name="item_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__transac_i__trans__60A75C0F">
+    <End Role="transac" Type="Self.transac" Multiplicity="1" />
+    <End Role="transac_item" Type="Self.transac_item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="transac">
+        <PropertyRef Name="transac_id" />
+      </Principal>
+      <Dependent Role="transac_item">
+        <PropertyRef Name="transac_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="count_itemcount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="count_itemname" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="prune" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_emptyall" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_movetofinalAmerge" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="level" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_refresh" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_stepfirst" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_stepsecond" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="itema" Type="varchar" Mode="In" />
+    <Parameter Name="itemb" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="Major_ProjectModelStoreContainer">
+    <EntitySet Name="item" EntityType="Self.item" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_const" EntityType="Self.tbl_const" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="transac" EntityType="Self.transac" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="transac_item" EntityType="Self.transac_item" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_FinalAmerge" EntityType="Self.tbl_FinalAmerge" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_FinalAmerge].[id] AS [id], 
+    [tbl_FinalAmerge].[merged_items] AS [merged_items]
+    FROM [dbo].[tbl_FinalAmerge] AS [tbl_FinalAmerge]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_FinalBmerge" EntityType="Self.tbl_FinalBmerge" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_FinalBmerge].[id] AS [id], 
+    [tbl_FinalBmerge].[item_id1] AS [item_id1], 
+    [tbl_FinalBmerge].[item_id2] AS [item_id2], 
+    [tbl_FinalBmerge].[item_id3] AS [item_id3], 
+    [tbl_FinalBmerge].[item_id4] AS [item_id4], 
+    [tbl_FinalBmerge].[item_id5] AS [item_id5], 
+    [tbl_FinalBmerge].[item_id6] AS [item_id6], 
+    [tbl_FinalBmerge].[item_id7] AS [item_id7], 
+    [tbl_FinalBmerge].[item_id8] AS [item_id8], 
+    [tbl_FinalBmerge].[item_id9] AS [item_id9], 
+    [tbl_FinalBmerge].[item_id10] AS [item_id10], 
+    [tbl_FinalBmerge].[item_id11] AS [item_id11], 
+    [tbl_FinalBmerge].[item_id12] AS [item_id12]
+    FROM [dbo].[tbl_FinalBmerge] AS [tbl_FinalBmerge]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_Initial1" EntityType="Self.tbl_Initial1" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_Initial1].[id] AS [id], 
+    [tbl_Initial1].[item_id1] AS [item_id1], 
+    [tbl_Initial1].[item_id2] AS [item_id2], 
+    [tbl_Initial1].[item_id3] AS [item_id3], 
+    [tbl_Initial1].[item_id4] AS [item_id4], 
+    [tbl_Initial1].[item_id5] AS [item_id5], 
+    [tbl_Initial1].[item_id6] AS [item_id6], 
+    [tbl_Initial1].[item_id7] AS [item_id7], 
+    [tbl_Initial1].[item_id8] AS [item_id8], 
+    [tbl_Initial1].[item_id9] AS [item_id9], 
+    [tbl_Initial1].[item_id10] AS [item_id10], 
+    [tbl_Initial1].[item_id11] AS [item_id11], 
+    [tbl_Initial1].[item_id12] AS [item_id12]
+    FROM [dbo].[tbl_Initial1] AS [tbl_Initial1]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_Initial2" EntityType="Self.tbl_Initial2" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_Initial2].[id] AS [id], 
+    [tbl_Initial2].[item_id1] AS [item_id1]
+    FROM [dbo].[tbl_Initial2] AS [tbl_Initial2]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__transac_i__item___619B8048" Association="Self.FK__transac_i__item___619B8048">
+      <End Role="item" EntitySet="item" />
+      <End Role="transac_item" EntitySet="transac_item" />
+    </AssociationSet>
+    <AssociationSet Name="FK__transac_i__trans__60A75C0F" Association="Self.FK__transac_i__trans__60A75C0F">
+      <End Role="transac" EntitySet="transac" />
+      <End Role="transac_item" EntitySet="transac_item" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

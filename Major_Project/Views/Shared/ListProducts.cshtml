@@ -1,0 +1,14 @@
+﻿@using MajorProject2.Models;
+
+@foreach (var product in (List<Product>)@Viewbag.Products)
+{
+    string imageUrl = "\"~Images/" + product.ProductID + ".jpg\"";
+    <div class="thumbnail">
+        <img src=@imageUrl alt="Product Image" />
+        <div class="caption">
+            <h3>@product.Title</h3>
+            <h5>Price: @product.Price</h5>
+            <a href="#" class="btn btn-warning" role="button">Add To Cart</a>
+        </div>
+    </div>
+}

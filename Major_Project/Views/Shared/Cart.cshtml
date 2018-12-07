@@ -1,0 +1,60 @@
+﻿@model Major_Project.Models.CartViewModel
+
+@if (Model == null || Model.SelectedProducts.Count() == 0)
+{        
+    <div class="alert alert-warning">
+        <p>Cart is empty!!!</p>
+    </div>
+}
+else
+{
+    
+<table class="table">
+    <tr>
+        <th>
+            Product Image
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.items.item_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.items.category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.items.item_price)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.SelectedProducts)
+    {
+        var imgUrl = "/images/" + item.item_id + ".jpg"; 
+        
+        <tr>
+            <td>
+                <img src="@imgUrl" alt="Product Image" width="90" height="90" />
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.item_name)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.category)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.item_price)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.item_id }, new{@class="btn btn-danger btn-xs"} )
+            </td>
+        </tr>
+    }
+    <tr>
+        <td colspan="3"><b><span class="text-success">Total Price</span></b> </td>
+        <td>
+            <b>
+            @Html.DisplayFor(modelItem => Model.TotalPrice)
+            </b>
+        </td>
+    </tr>
+</table>
+}

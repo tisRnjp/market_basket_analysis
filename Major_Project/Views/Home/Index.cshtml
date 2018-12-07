@@ -1,0 +1,119 @@
+﻿@model IEnumerable<Major_Project.Models.item>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="container">
+    @*slider*@
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active" style="margin-left:100px;"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1" style="margin-left:100px;"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2" style="margin-left:100px;"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <img class="img-responsive" src="~/images/101.jpg" style="height: 250px; width: 250px;">
+                <img src="~/images/134.jpg" style="height:250px;width:250px;" />
+                <img src="~/images/133.jpg" style="height:250px;width:250px;" />
+                <img src="~/images/145.jpg" style="height:250px;width:250px;" />
+                <div class=" carousel-caption">
+                    <h3>Caption Text</h3>
+                </div>
+            </div>
+            <div class="item">
+
+                <img class="img-responsive" src="~/images/151.jpg" style="height: 250px; width: 250px;">
+                <img src="~/images/154.jpg" style="height:250px;width:250px;" />
+                <img src="~/images/153.jpg" style="height:250px;width:250px;" />
+                <img src="~/images/155.jpg" style="height:250px;width:250px;" />
+                <div class="carousel-caption">
+                    <h3>Caption Text</h3>
+                </div>
+            </div>
+            <div class="item">
+                <img class="img-responsive" src="~/images/101.jpg" style="height: 250px; width: 250px;">
+                <img src="~/images/124.jpg" style="height:250px;width:250px;" />
+                <img src="~/images/123.jpg" style="height:250px;width:250px;" />
+                <img src="~/images/125.jpg" style="height:250px;width:250px;" />
+                <div class="carousel-caption">
+                    <h3></h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div> <!-- Carousel -->
+</div>  @*slider*@
+<br/>
+<div class="container">
+    <hr/>
+    <div class="row">
+        @foreach (var x in Model)
+        {
+            var imageName = "/images/" + @x.item_id + ".jpg";
+
+
+       <!-- <div class="col-sm-6 col-md-3">-->
+            <div class="col-lg-2 col-md-2 col-xs-6 thumb">
+                <a href="@Url.Action("Index", "Analysis", new { id = x.item_id }, null)">
+                    <div class="thumbnail">
+
+                        <img src="@imageName" />
+
+
+                    </div>
+                </a>
+                <div class="caption capitalize">
+                    <h6><span class="glyphicon  glyphicon-shopping-cart"></span>@Html.DisplayFor(model => x.item_name)</h6>
+                    @*<h6>@Html.DisplayFor(model => x.item_id)</h6>*@
+                </div>
+
+                @*<a class="thumbnail" href="#">
+                        <img class="img-responsive imgsize" src="@imageName" alt="" >
+
+                    </a>
+                    <div class="caption">
+                        <h6>@Html.DisplayFor(model => x.item_name)</h6>
+                        <h6>@Html.DisplayFor(model => x.item_id)</h6>
+                    </div>*@
+            </div>
+
+
+
+
+        }
+
+    </div>
+</div>    
+<div class="container" style="margin-left:450px;">
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "paginationForm" }))
+    {
+        <nav>
+            <ul class="pagination">
+
+
+                <li><a href="@Url.Action("Index", "Home", new { id = 1 }, null)">1</a></li>
+                <li><a href="@Url.Action("Index", "Home", new { id = 2 }, null)">2</a></li>
+                <li><a href="@Url.Action("Index", "Home", new { id = 3 }, null)">3</a></li>
+                <li><a href="@Url.Action("Index", "Home", new { id = 4 }, null)">4</a></li>
+                <li><a href="@Url.Action("Index", "Home", new { id = 5 }, null)">5</a></li>
+                <li><a href="@Url.Action("Index", "Home", new { id = 6 }, null)">6</a></li>
+                <li><a href="@Url.Action("Index", "Home", new { id = 7 }, null)">7</a></li>
+
+
+            </ul>
+        </nav>
+    }
+</div>

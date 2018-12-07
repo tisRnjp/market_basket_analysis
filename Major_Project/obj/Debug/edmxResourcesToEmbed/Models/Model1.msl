@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Major_ProjectModelStoreContainer" CdmEntityContainer="Major_ProjectEntities">
+    <EntitySetMapping Name="items">
+      <EntityTypeMapping TypeName="Major_ProjectModel.item">
+        <MappingFragment StoreEntitySet="item">
+          <ScalarProperty Name="item_id" ColumnName="item_id" />
+          <ScalarProperty Name="item_name" ColumnName="item_name" />
+          <ScalarProperty Name="item_price" ColumnName="item_price" />
+          <ScalarProperty Name="category" ColumnName="category" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_const">
+      <EntityTypeMapping TypeName="Major_ProjectModel.tbl_const">
+        <MappingFragment StoreEntitySet="tbl_const">
+          <ScalarProperty Name="item_id" ColumnName="item_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="transacs">
+      <EntityTypeMapping TypeName="Major_ProjectModel.transac">
+        <MappingFragment StoreEntitySet="transac">
+          <ScalarProperty Name="transac_id" ColumnName="transac_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_FinalAmerge">
+      <EntityTypeMapping TypeName="Major_ProjectModel.tbl_FinalAmerge">
+        <MappingFragment StoreEntitySet="tbl_FinalAmerge">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="merged_items" ColumnName="merged_items" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_FinalBmerge">
+      <EntityTypeMapping TypeName="Major_ProjectModel.tbl_FinalBmerge">
+        <MappingFragment StoreEntitySet="tbl_FinalBmerge">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="item_id1" ColumnName="item_id1" />
+          <ScalarProperty Name="item_id2" ColumnName="item_id2" />
+          <ScalarProperty Name="item_id3" ColumnName="item_id3" />
+          <ScalarProperty Name="item_id4" ColumnName="item_id4" />
+          <ScalarProperty Name="item_id5" ColumnName="item_id5" />
+          <ScalarProperty Name="item_id6" ColumnName="item_id6" />
+          <ScalarProperty Name="item_id7" ColumnName="item_id7" />
+          <ScalarProperty Name="item_id8" ColumnName="item_id8" />
+          <ScalarProperty Name="item_id9" ColumnName="item_id9" />
+          <ScalarProperty Name="item_id10" ColumnName="item_id10" />
+          <ScalarProperty Name="item_id11" ColumnName="item_id11" />
+          <ScalarProperty Name="item_id12" ColumnName="item_id12" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Initial1">
+      <EntityTypeMapping TypeName="Major_ProjectModel.tbl_Initial1">
+        <MappingFragment StoreEntitySet="tbl_Initial1">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="item_id1" ColumnName="item_id1" />
+          <ScalarProperty Name="item_id2" ColumnName="item_id2" />
+          <ScalarProperty Name="item_id3" ColumnName="item_id3" />
+          <ScalarProperty Name="item_id4" ColumnName="item_id4" />
+          <ScalarProperty Name="item_id5" ColumnName="item_id5" />
+          <ScalarProperty Name="item_id6" ColumnName="item_id6" />
+          <ScalarProperty Name="item_id7" ColumnName="item_id7" />
+          <ScalarProperty Name="item_id8" ColumnName="item_id8" />
+          <ScalarProperty Name="item_id9" ColumnName="item_id9" />
+          <ScalarProperty Name="item_id10" ColumnName="item_id10" />
+          <ScalarProperty Name="item_id11" ColumnName="item_id11" />
+          <ScalarProperty Name="item_id12" ColumnName="item_id12" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Initial2">
+      <EntityTypeMapping TypeName="Major_ProjectModel.tbl_Initial2">
+        <MappingFragment StoreEntitySet="tbl_Initial2">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="item_id1" ColumnName="item_id1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="transac_item" TypeName="Major_ProjectModel.transac_item" StoreEntitySet="transac_item">
+      <EndProperty Name="item">
+        <ScalarProperty Name="item_id" ColumnName="item_id" />
+      </EndProperty>
+      <EndProperty Name="transac">
+        <ScalarProperty Name="transac_id" ColumnName="transac_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="prune" FunctionName="Major_ProjectModel.Store.prune" />
+    <FunctionImportMapping FunctionImportName="sp_emptyall" FunctionName="Major_ProjectModel.Store.sp_emptyall">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Major_ProjectModel.sp_emptyall_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="item_id1" ColumnName="item_id1" />
+          <ScalarProperty Name="item_id2" ColumnName="item_id2" />
+          <ScalarProperty Name="item_id3" ColumnName="item_id3" />
+          <ScalarProperty Name="item_id4" ColumnName="item_id4" />
+          <ScalarProperty Name="item_id5" ColumnName="item_id5" />
+          <ScalarProperty Name="item_id6" ColumnName="item_id6" />
+          <ScalarProperty Name="item_id7" ColumnName="item_id7" />
+          <ScalarProperty Name="item_id8" ColumnName="item_id8" />
+          <ScalarProperty Name="item_id9" ColumnName="item_id9" />
+          <ScalarProperty Name="item_id10" ColumnName="item_id10" />
+          <ScalarProperty Name="item_id11" ColumnName="item_id11" />
+          <ScalarProperty Name="item_id12" ColumnName="item_id12" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_movetofinalAmerge" FunctionName="Major_ProjectModel.Store.sp_movetofinalAmerge" />
+    <FunctionImportMapping FunctionImportName="sp_refresh" FunctionName="Major_ProjectModel.Store.sp_refresh" />
+    <FunctionImportMapping FunctionImportName="sp_stepfirst" FunctionName="Major_ProjectModel.Store.sp_stepfirst" />
+    <FunctionImportMapping FunctionImportName="sp_stepsecond" FunctionName="Major_ProjectModel.Store.sp_stepsecond" />
+    <FunctionImportMapping FunctionImportName="count_itemname" FunctionName="Major_ProjectModel.Store.count_itemname" />
+    <FunctionImportMapping FunctionImportName="count_itemcount" FunctionName="Major_ProjectModel.Store.count_itemcount" />
+  </EntityContainerMapping>
+</Mapping>
